@@ -2,7 +2,7 @@ import React from "react";
 
 function Carousel() {
   return (
-    <div className="container mt-3">
+    <div className="container-fluid mt-3" style={{objectFit: "contain !important"}}>
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade"
@@ -29,7 +29,7 @@ function Carousel() {
               src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
               className="d-block w-100"
               alt="burger"
-              style={{ height: "600px", objectFit: "cover", filter: "brightness(30%" }}
+              style={{ height: "100vh", objectFit: "cover", filter: "brightness(30%" }}
             />
           </div>
 
@@ -38,7 +38,7 @@ function Carousel() {
               src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg"
               className="d-block w-100"
               alt="biryani"
-              style={{ height: "600px", objectFit: "cover", filter: "brightness(30%" }}
+              style={{ height: "100vh", objectFit: "cover", filter: "brightness(30%" }}
             />
           </div>
 
@@ -47,7 +47,7 @@ function Carousel() {
               src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
               className="d-block w-100"
               alt="zinger"
-              style={{ height: "600px", objectFit: "cover", filter: "brightness(30%" }}
+              style={{ height: "100vh", objectFit: "cover", filter: "brightness(30%" }}
             />
           </div>
         </div>

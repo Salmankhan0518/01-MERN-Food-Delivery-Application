@@ -10,6 +10,12 @@ function Home() {
       <div> <Navbar /> </div>
       <div> <Carousel /> </div>
       <div> <Card /> </div>
+      <div> <Card /> </div>
+      <div> <Card /> </div>
+      <div> <Card /> </div>
+      <div> <Card /> </div>
+      <div> <Card /> </div>
+      <div> <Card /> </div>
       <div> <Footer /> </div>
     </div>
   );

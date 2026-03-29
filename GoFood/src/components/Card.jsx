@@ -5,10 +5,10 @@ function Card() {
     <div>
       <div>
         <div
-          className="card mt-3"
+          className="card m-3"
           style={{ width: "18rem", maxHeight: "360px" }}
         >
-          <img src="..." className="card-img-top" alt="..." />
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">Card title</h5>
             <p className="card-text">This is some important text.</p>
