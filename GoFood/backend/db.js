@@ -9,8 +9,10 @@ const connectDB = async () => {
     console.log("DB connected successfully");
     const fetchedData = await mongoose.connection.db.collection("food_items")
     const data = await fetchedData.find({}).toArray();
-    console.log("Connected to:", mongoose.connection.db.databaseName);
-    console.log(data)
+
+    // console.log("Connected to:", mongoose.connection.db.databaseName);
+    // console.log(data)
+    
   } catch (error) {
     console.log("MONGODB connection FAILED !!! ", error);
     process.exit(1);
