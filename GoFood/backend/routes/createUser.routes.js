@@ -46,7 +46,7 @@ router.post(
     let email = req.body.email;
 
     try {
-      let userData = await User.findOne({email: email});
+      let userData = await User.findOne({ email: email });
 
       if (!userData) {
         return res

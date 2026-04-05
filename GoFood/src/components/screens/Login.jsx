@@ -27,7 +27,6 @@ function Login() {
     const json = await response.json();
     console.log(json);
 
-
     if (json.success) {
       navigate("/");
     }
