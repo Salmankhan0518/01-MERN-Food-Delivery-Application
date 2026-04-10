@@ -11,10 +11,12 @@ function Card(props) {
           className="card m-3 mb-3"
           style={{ width: "18rem", maxHeight: "360px" }}
         >
+        
           <img
             src={props.imgSrc}
             className="card-img-top"
             alt="..."
+            style={{ height: "150px", objectFit: "cover" }}
           />
           <div className="card-body">
             <h5 className="card-title">{props.foodname}</h5>
