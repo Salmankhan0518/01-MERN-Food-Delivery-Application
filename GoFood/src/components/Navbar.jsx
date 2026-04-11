@@ -21,23 +21,46 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav me-auto mb-2">
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" href="/">
+                <Link
+                  className="nav-link active fs-5"
+                  aria-current="page"
+                  href="/"
+                >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
+
+              {localStorage.getItem("authToken") ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active fs-5"
+                    aria-current="page"
+                    href="/"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+            {localStorage.getItem("authToken") ? (
+              <div className="d-flex">
+                <Link className=" mx-1 btn bg-white text-success" to="/login">
                   Login
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/createuser">
+                <Link
+                  className="btn bg-white text-success mx-1"
+                  to="/createuser"
+                >
                   Sign Up
                 </Link>
-              </li>
-            </ul>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </nav>
