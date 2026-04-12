@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatchCart, useCart } from "./ContextReducer"
 
 function Card(props) {
+  let dispatch = useDispatchCart();
   const options = props.options;
   const priceOptions = Object.keys(options);
+  let foodItem = props.foodItems;
+  const [qty, setQty] = useState(1);
+  const [size, setSize] = useState("");
+
+
+  const handleAddToCart = async () => {
+      await dispatch({
+        type: "ADD",
+        id: props.foodItem._id,
+        name: props.foodItem.name,
+        price: props.finalPrice,
+        qyt: qyt, 
+        size: size
+      })
+  }
 
   return (
     <div>
@@ -13,13 +30,13 @@ function Card(props) {
         >
         
           <img
-            src={props.imgSrc}
+            src={props.foodItem.img}
             className="card-img-top"
             alt="..."
             style={{ height: "150px", objectFit: "cover" }}
           />
           <div className="card-body">
-            <h5 className="card-title">{props.foodname}</h5>
+            <h5 className="card-title">{props.foodItem.name}</h5>
             <div className="container w-100">
               <select className="m-2 h-100 bg-success rounded">
                 {Array.from(Array(6), (e, i) => {
@@ -41,6 +58,8 @@ function Card(props) {
               </select>
               <div className="d-inline h-100 fs-5">Total Price</div>
             </div>
+            <hr></hr>
+            <button className="btn btn-success justify-center ms-2" onClick={handleAddToCart}>Add to Cart</button>
           </div>
         </div>
       </div>
