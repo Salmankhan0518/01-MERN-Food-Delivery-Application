@@ -28,7 +28,6 @@ function Home() {
     <div className="bg-light" style={{ minHeight: "100vh" }}>
       <Navbar />
 
-      {/* Carousel Section - Fixed Padding and Margins */}
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade shadow-sm"
