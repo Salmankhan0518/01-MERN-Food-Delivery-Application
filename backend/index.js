@@ -17,6 +17,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use("/api", require("./routes/createUser.routes.js"));
 app.use("/api", require("./routes/DisplayData"));
+app.use("/api", require("./routes/OrderData"));
 
 mongoDB()
   .then(() => {
