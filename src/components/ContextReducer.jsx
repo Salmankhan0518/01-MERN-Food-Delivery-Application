@@ -10,7 +10,8 @@ const reducer = (state, action) => {
       return [...state, {id: action.id, name: action.name, qty: action.qty, size: action.size, price: action.price, img: action.img}]
 
     default:
-      console.log("Error in reducer")  
+      return state;
+      console.log("Error in reducer")
    }
 }
 
