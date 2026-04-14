@@ -13,16 +13,48 @@ function Card(props) {
   const [size, setSize] = useState("");
 
   const handleAddToCart = async () => {
+    let food = null;
+    for (const item of data) {
+      if (item.id === props.foodItem._id) {
+        food = item;
+        break;
+      }
+    }
+
+    if (food !== null) {
+      if (food.size === size) {
+        // Agar item pehle se hai aur size bhi wahi hai -> Update
+        await dispatch({
+          type: "UPDATE",
+          id: props.foodItem._id,
+          price: finalPrice,
+          qty: qty,
+        })
+        return;
+      } else {
+        // Agar item hai magar size alag hai -> Add as new
+        await dispatch({
+          type: "ADD",
+          id: props.foodItem._id,
+          name: props.foodItem.name,
+          price: finalPrice,
+          qty: qty,
+          size: size,
+        })
+        return;
+      }
+    }
+
+    // --- YE BLOCK IF SE BAHAR HONA CHAHIYE ---
+    // Ye tab chalega jab cart mein ye item bilkul nahi hoga (food === null)
     await dispatch({
       type: "ADD",
-      id: foodItem._id,
-      name: foodItem.name,
+      id: props.foodItem._id,
+      name: props.foodItem.name,
       price: finalPrice,
       qty: qty,
       size: size,
-    });
-
-    console.log(data);
+    })
   };
 
   let finalPrice = qty * (options[size] ? parseInt(options[size]) : 0);
