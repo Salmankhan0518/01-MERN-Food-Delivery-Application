@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatchCart, useCart } from "./ContextReducer";
-import { useReducer } from "react";
 
 function Card(props) {
   let dispatch = useDispatchCart();
@@ -8,7 +7,6 @@ function Card(props) {
   const priceRef = useRef();
   const options = props.options;
   const priceOptions = Object.keys(options);
-  let foodItem = props.foodItem;
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
 
@@ -23,16 +21,14 @@ function Card(props) {
 
     if (food !== null) {
       if (food.size === size) {
-        // Agar item pehle se hai aur size bhi wahi hai -> Update
         await dispatch({
           type: "UPDATE",
           id: props.foodItem._id,
           price: finalPrice,
           qty: qty,
-        })
+        });
         return;
       } else {
-        // Agar item hai magar size alag hai -> Add as new
         await dispatch({
           type: "ADD",
           id: props.foodItem._id,
@@ -40,13 +36,11 @@ function Card(props) {
           price: finalPrice,
           qty: qty,
           size: size,
-        })
+        });
         return;
       }
     }
 
-    // --- YE BLOCK IF SE BAHAR HONA CHAHIYE ---
-    // Ye tab chalega jab cart mein ye item bilkul nahi hoga (food === null)
     await dispatch({
       type: "ADD",
       id: props.foodItem._id,
@@ -54,65 +48,77 @@ function Card(props) {
       price: finalPrice,
       qty: qty,
       size: size,
-    })
+    });
   };
 
   let finalPrice = qty * (options[size] ? parseInt(options[size]) : 0);
+
   useEffect(() => {
     setSize(priceRef.current.value);
   }, []);
 
   return (
     <div>
-      <div>
-        <div
-          className="card m-3 mb-3"
-          style={{ width: "18rem", maxHeight: "360px" }}
-        >
-          <img
-            src={props.foodItem.img}
-            className="card-img-top"
-            alt="..."
-            style={{ height: "150px", objectFit: "cover" }}
-          />
-          <div className="card-body">
-            <h5 className="card-title">{props.foodItem.name}</h5>
-            <div className="container w-100">
+      <div 
+        className="card m-3 shadow-lg border-0 bg-dark text-white h-100" 
+        style={{ width: "18rem", borderRadius: "15px", overflow: "hidden" }}
+      >
+        {/* Image Size Adjusted: Height increased for better visibility */}
+        <img
+          src={props.foodItem.img}
+          className="card-img-top"
+          alt={props.foodItem.name}
+          style={{ height: "200px", objectFit: "cover" }}
+        />
+        
+        <div className="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 className="card-title fw-bold text-success mb-2">{props.foodItem.name}</h5>
+          </div>
+          
+          <div className="container w-100 p-0">
+            <div className="d-flex align-items-center mb-3">
+              {/* Quantity Select */}
               <select
-                className="m-2 h-100 bg-success rounded"
+                className="form-select form-select-sm bg-success text-white border-0 me-2"
+                style={{ cursor: "pointer", width: "70px" }}
                 onChange={(e) => setQty(Number(e.target.value))}
               >
-                {Array.from(Array(6), (e, i) => {
-                  return (
-                    <option key={i + 1} value={i + 1}>
-                      {i + 1}
-                    </option>
-                  );
-                })}
+                {Array.from(Array(6), (e, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
               </select>
+
+              {/* Size Select */}
               <select
-                className="m-2 h-100 bg-success rounded"
+                className="form-select form-select-sm bg-success text-white border-0 flex-grow-1"
+                style={{ cursor: "pointer" }}
                 ref={priceRef}
                 onChange={(e) => setSize(e.target.value)}
               >
-                {priceOptions.map((data) => {
-                  return (
-                    <option key={data} value={data}>
-                      {data}
-                    </option>
-                  );
-                })}
+                {priceOptions.map((data) => (
+                  <option key={data} value={data}>
+                    {data}
+                  </option>
+                ))}
               </select>
-              <div className="d-inline h-100 fs-5">Rs:{finalPrice}/-</div>
             </div>
-            <hr></hr>
-            <button
-              className="btn btn-success justify-center ms-2"
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-            </button>
+
+            <div className="fs-5 fw-bold mb-2">
+              Rs: <span className="text-success">{finalPrice}/-</span>
+            </div>
           </div>
+          
+          <hr className="border-secondary my-2" />
+          
+          <button
+            className="btn btn-success w-100 fw-bold shadow-sm py-2"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
