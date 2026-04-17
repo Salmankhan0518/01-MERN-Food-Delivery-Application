@@ -1,9 +1,12 @@
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, ".env") });
+const dotenv = require("dotenv");
 
-console.log("DIR:", __dirname);
-console.log("ENV TEST:", process.env.MONGO_URI);
-require("dotenv").config();
+dotenv.config({ path: path.resolve(__dirname, "./.env") });
+
+console.log("Current Directory:", __dirname);
+console.log("MONGO_URI from Env:", process.env.MONGO_URI);
+
+
 const express = require("express");
 const cors = require("cors");
 
