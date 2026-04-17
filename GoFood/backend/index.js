@@ -1,23 +1,36 @@
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+
+console.log("DIR:", __dirname);
+console.log("ENV TEST:", process.env.MONGO_URI);
+require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 const port = 5000;
 const mongoDB = require("./db");
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept",
-  );
+console.log("ENV CHECK:", process.env.MONGO_URI);
 
-  next();
-});
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
+
+
+app.options("*", cors());
+
 
 app.use(express.json());
+
+
 app.use("/api", require("./routes/createUser.routes.js"));
 app.use("/api", require("./routes/DisplayData"));
-app.use("/api/auth", require("./routes/OderData.js"));
+app.use("/api/auth", require("./routes/OrderData.js"));
+
 
 mongoDB()
   .then(() => {

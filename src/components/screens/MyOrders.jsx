@@ -18,7 +18,7 @@ export default function MyOrder() {
         body: JSON.stringify({ email: userEmail }),
       });
       let res = await response.json();
-      setorderData(res);
+      setorderData(res.orderData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -34,8 +34,8 @@ export default function MyOrder() {
       <div className="container">
         <div className="row">
           {/* Check if data exists and has order_data */}
-          {orderData && orderData.orderData && orderData.orderData.order_data ? (
-            orderData.orderData.order_data
+          {orderData && orderData?.order_data?.length > 0 ? (
+            orderData.order_data
               .slice(0)
               .reverse()
               .map((item, index) => {
