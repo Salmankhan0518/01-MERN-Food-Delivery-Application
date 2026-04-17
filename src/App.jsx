@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element = { <Home/> }/>
           <Route path="/login" element = { <Login />}/>
           <Route path="/createuser" element = { <SignUp />} />
-          <Route path="/myorderData" element = { <MyOrders />} />
+          <Route path="/myOrder" element = { <MyOrders />} />
       </Routes>
     </BrowserRouter>
     </CartProvider>
